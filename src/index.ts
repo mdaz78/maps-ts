@@ -1,14 +1,14 @@
 /// <reference types="@types/google.maps" />
 
-// import { User } from './User';
-// import { Company } from './Company';
-
+import { User } from './User';
+import { Company } from './Company';
 import { Map } from './Map';
 
-// const user = new User();
-// const company = new Company();
+const user = new User();
+const company = new Company();
+const map = new Map('map', {
+  zoom: 3,
+});
 
-// console.log(user);
-// console.log(company);
-
-const map = new Map('map');
+map.addMarker(user);
+map.addMarker(company);
