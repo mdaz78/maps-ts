@@ -3,6 +3,7 @@ interface Mappable {
     latitude: number;
     longitude: number;
   };
+  markerContent(): string;
 }
 
 interface MapOptions {
@@ -29,12 +30,20 @@ export class Map {
   addMarker(mappable: Mappable) {
     const { latitude, longitude } = mappable.location;
 
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: latitude,
         lng: longitude,
       },
+    });
+
+    marker.addListener('click', () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: mappable.markerContent(),
+      });
+
+      infoWindow.open(this.googleMap, marker);
     });
   }
 }
